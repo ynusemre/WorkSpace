@@ -1,0 +1,6041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ 
+
+Revision List:
+
+Date           Sign        Description
+
+++++           ++++        +++++++++++
+
+2002-12-10     Marsell     Rename DVP_INSTRUCTION_CONFIRM_REJECT ->
+
+                                   DVP_INSTRUCTION_CONFIRM
+
+                                   and    DVP_INSTRUCTION_CONFIRM_REJECT_P ->
+
+                                   DVP_INSTRUCTION_CONFIRM_P
+
+2003-03-31     inja        Added  SC8195 and SC8197
+
+2003-04-28     Marsell     Added  SQ2058 and SA2058
+
+2003-05-08     ELWA        Remove SQ2058 and SA2058 and
+
+                            Added  SQ2049 and SA2049
+
+2003-05-09     MIOS        Added  SQ10,SA10, SQ11,SA11
+
+2003-05-20        MIOS         Changed SQ10->SQ266, SQ11->SQ267
+
+2003-11-19     ANHS        Added  SQ2058 and SA2058 on facility EP4, FS#1463
+
+                                   and SQ2050
+
+ 2003-11-27     Marsell     Remove DVP_INSTRUCTION_RECTIFY_P
+
+2003-12-03     Marsell     Added  DVP_INSTRUCTION_CANCEL_REQ 
+
+ 2003-12-03     Marsell     Merged variant 17A1 into class API_V020 (18)
+
+2003-12-16     ANHS        Changed SQ66 to correct SQ266
+
+2004-03-12     ANHS        Added  SQ2059 CANCEL_VPC_DELIVERY (uses SA2052)
+
+2004-03-17     ANHS        Changed facility EP0->EP4 for SQ2052,SQ2059,
+
+                                    IP1->EP4 for SQ266, SQ267. Segmented set
+
+                                    to true for SA1,SA2,SA3,SA2052,SA2058
+
+2004-03-29     ANHS        Changed Facility to IP2 for SQ266, SQ267 (#1815)
+
+19.0 2006-03-31 ANHS        Updated i-names for documentation purposes, incl
+
+                                                 added Internal for protected transactions 256+ and
+
+                                                 Privileged for 1024/2048+ (no proxy?). Incl in API manual
+
+                                                 if in <protected> tag in omex_%%.XML, not incl if <private>
+
+                                                 SQ3 info:Only KFE Cash Deposit accounts, no currency
+
+0.0 2006-03-31  ANHS        Corrected SQ2058 i-name       
+
+0.0 2006-05-18  Marsell     General cleanup, moved SE structs from CL_MESSAGE :
+
+                                                 DELIVERY_TRANS and
+
+ 2006-03-20        ASKU         Added SQ4 and SA4
+
+2008-06-17        MILV          Changed SQ2058 and SA2058. Clearing day instead of
+
+                                                 Business day.
+
+2006-03-20        ASKU         Added SQ4 and SA4
+
+2006-03-31     ANHS        Updated i-names for documentation purposes, incl
+
+                                                 added Internal for protected transactions 256+ and
+
+                                                 Privileged for 1024/2048+ (no proxy?). Incl in API manual
+
+                                                 if in <protected> tag in omex_%%.XML, not incl if <private>
+
+                                                 SQ3 info:Only KFE Cash Deposit accounts, no currency
+
+2011-09-15      Marsell     Add SQ279 (QUERY_RT_PAYMENTINFO) and
+
+                            SA279 (ANSWER_RT_PAYMENTINFO)
+
+2011-09-19      Marsell     Add SB3 (SE_BDX_RT_PAYMENT_STATUS)
+
+2011-09-20      Marsell     Add SQ280 (QUERY_RT_PMT_CUR_STATUS) and
+
+                            SA280 (ANSWER_RT_PMT_CUR_STATUS)
+
+2011-12-14      Marsell     Removed (obsolete?) SA6 answer
+
+2012-01-10      Marsell     Add SC274 (and SC2066, privileged variant)
+
+2012-01-24      Marsell     Add SC531 (ADD_INSRUCTION_NBR)
+
+2012-02-08      Marsell     Change struct for SQ2049
+
+2012-02-09      Marsell     Add SC532
+
+2013-06-27      Marsell        Add SQ261, SQ262, SQ514, SQ2053, SC275, SC2062 and SC2067 (GENIUM-23973)
+
+2013-07-04      Marsell     Add SB5 and SB2060 (GENIUM-23973)
+
+2013-06-27      Marsell        Add SC2068/ SA2068 (GENIUM-23973)
+
+2013-09-18      Marsell     Correct SC2068 (GENIUM-23973)
+
+2017-06-12      Biscel      Add SC530 internal variant of SC274 (GENIUM-61702)
+
+                           
+
+-->
+
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="17.3" xsi:noNamespaceSchemaLocation="http://utv1/ode_dev2/api/xml_api-revised-6.xsd">
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA1</name>
+
+        <i-name>Pay Note</i-name>
+
+        <structure_ref>ANSWER_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ1</name>
+
+        <i-name>Pay Note</i-name>
+
+        <structure_ref>QUERY_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA1</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2</name>
+
+        <i-name>Manual Payment</i-name>
+
+        <structure_ref>ANSWER_MANUAL_PAYMENTS</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2</name>
+
+        <i-name>Manual Payment</i-name>
+
+        <structure_ref>QUERY_MANUAL_PAYMENTS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>BI26</name>
+
+        <i-name>Pay note information ready</i-name>
+
+        <structure_ref>PAY_NOTE_INFO_READY</structure_ref>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ3</name>
+
+        <i-name>Cash Deposit</i-name>
+
+        <structure_ref>QUERY_CASH_DEPOSIT</structure_ref>
+
+        <properties>
+
+            <facility>EP0</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA3</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ259</name>
+
+        <i-name>Cash Deposit, Private</i-name>
+
+        <structure_ref>QUERY_CASH_DEPOSIT</structure_ref>
+
+        <properties>
+
+            <facility>EP0</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA259</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA3</name>
+
+        <i-name>Cash Deposit</i-name>
+
+        <structure_ref>ANSWER_CASH_DEPOSIT</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA259</name>
+
+        <i-name>Cash Deposit, Private</i-name>
+
+        <structure_ref>ANSWER_CASH_DEPOSIT</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2052</name>
+
+        <i-name>VPC Deliveries</i-name>
+
+        <structure_ref>ANSWER_VPC_DELIVERY</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2052</name>
+
+        <i-name>VPC Deliveries</i-name>
+
+        <structure_ref>QUERY_VPC_DELIVERY</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2052</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2049</name>
+
+        <i-name>Confirm VPC Delivery</i-name>
+
+        <structure_ref>CONFIRM_VPC_DELIVERY</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB1</name>
+
+        <i-name>DvP Instruction</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_BDX</structure_ref>
+
+        <properties>
+
+            <info_type>dedicated</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC3</name>
+
+        <i-name>DvP Instruction, Modify &amp; Resend</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_RESEND</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC259</name>
+
+        <i-name>DvP Instruction, Modify &amp; Resend priv</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_RESEND</structure_ref>
+
+        <properties>
+
+           <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC258</name>
+
+        <i-name>DvP Instruction, Update Private</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_UPDATE_PRIV</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2</name>
+
+        <i-name>DvP Instruction, Update</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_UPDATE</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2054</name>
+
+        <i-name>DvP Instruction, Multi Update Privileged</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_MULTI_UPDATE</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ7</name>
+
+        <i-name>DvP Instruction History, Today</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA7</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ8</name>
+
+        <i-name>DvP Instruction History, Historic</i-name>
+
+        <structure_ref>QUERY_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP5</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA8</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ264</name>
+
+        <i-name>DvP Instruction History for all DVP instructions, Private</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA264</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ263</name>
+
+        <i-name>DvP Instruction History for all DVP instructions, Private</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA263</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA7</name>
+
+        <i-name>DvP Instruction History, Today</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA8</name>
+
+        <i-name>DvP Instruction History, Historic</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA264</name>
+
+        <i-name>DvP Instruction History for all DVP instructions, Private</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA263</name>
+
+        <i-name>DvP Instruction History for all DVP instructions, Private</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ5</name>
+
+        <i-name>DvP Instruction, Missing</i-name>
+
+        <structure_ref>QUERY_MISSING_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA5</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA5</name>
+
+        <i-name>DvP Instruction, Missing</i-name>
+
+        <structure_ref>ANSWER_MISSING_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ6</name>
+
+        <i-name>DvP Instruction, Historic</i-name>
+
+        <structure_ref>QUERY_HISTORIC_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP5</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA6</answer>
+
+            </answers>
+
+       </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA6</name>
+
+        <i-name>DvP Instruction, Historic</i-name>
+
+        <structure_ref>ANSWER_HISTORIC_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC4</name>
+
+        <i-name>DvP Instruction, Rectify</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_RECTIFY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC260</name>
+
+        <i-name>DvP Instruction, Rectify Private</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_RECTIFY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ9</name>
+
+        <i-name>DvP Rectifications, Holding</i-name>
+
+        <structure_ref>QUERY_HOLDING_RECTIFY_DVP</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>true</partitioned>
+
+            <answers>
+
+                <answer>SA9</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA9</name>
+
+        <i-name>DvP Rectifications, Holding</i-name>
+
+        <structure_ref>ANSWER_HOLDING_RECTIFY_DVP</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ265</name>
+
+        <i-name>DvP Rectifications, Holding Private</i-name>
+
+        <structure_ref>QUERY_HOLDING_RECTIFY_DVP_P</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>true</partitioned>
+
+            <answers>
+
+                <answer>SA265</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA265</name>
+
+        <i-name>DvP Rectifications, Holding Private</i-name>
+
+        <structure_ref>ANSWER_HOLDING_RECTIFY_DVP</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB2</name>
+
+        <i-name>DvP Rectifications, Holding</i-name>
+
+        <structure_ref>HOLDING_RECTIFY_DVP_INFO</structure_ref>
+
+        <properties>
+
+            <info_type>dedicated</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC5</name>
+
+        <i-name>DvP Instruction, Confirm/Reject</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_CONFIRM</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC261</name>
+
+        <i-name>DvP Instruction, Confirm/Reject Priv</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_CONFIRM</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8196</name>
+
+        <i-name>SC4, Authorize</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_RECTIFY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8452</name>
+
+        <i-name>SC260, Authorize</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_RECTIFY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8466</name>
+
+        <i-name>SC274, Authorize</i-name>
+
+        <structure_ref>DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8473</name>
+
+        <i-name>SC281, Authorize</i-name>
+
+        <structure_ref>CREATE_DELIVERY_REQUEST_DVP_INSTRUCTIONS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8468</name>
+
+        <i-name>SC276, Authorize</i-name>
+
+        <structure_ref>TRANSFER_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8469</name>
+
+        <i-name>SC277, Authorize</i-name>
+
+        <structure_ref>CLOSE_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8482</name>
+
+        <i-name>SC290, Authorize</i-name>
+
+        <structure_ref>PENALTY_CONF_CONFIRM</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC8450</name>
+
+        <i-name>SC258, Authorize</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_UPDATE_PRIV</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2049</name>
+
+        <i-name>All Pay Notes one Settlement Date, Privileged</i-name>
+
+        <structure_ref>QUERY_PAYNOTE_INFO_PRIV</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>true</partitioned>
+
+            <answers>
+
+                <answer>SA2049</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2049</name>
+
+        <i-name>All Pay Notes one Settlement Date, Privileged</i-name>
+
+        <structure_ref>ANSWER_PAYNOTE_INFO_PRIV</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA266</name>
+
+        <i-name>Execute Dynamic SQL, Internal</i-name>
+
+        <structure_ref>ANSWER_SQL_EXEC</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ266</name>
+
+        <i-name>Execute Dynamic SQL, Internal</i-name>
+
+        <structure_ref>QUERY_SQL_EXEC</structure_ref>
+
+        <properties>
+
+            <facility>IP2</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA266</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA267</name>
+
+        <i-name>Execute Shell Command, Internal</i-name>
+
+        <structure_ref>ANSWER_EXEC_COMMAND</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ267</name>
+
+        <i-name>Execute Shell Command, Internal</i-name>
+
+        <structure_ref>QUERY_EXEC_COMMAND</structure_ref>
+
+        <properties>
+
+            <facility>IP2</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA267</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2058</name>
+
+        <i-name>All Pay Notes Created one Clearing Day, Privileged</i-name>
+
+        <structure_ref>ANSWER_CREATED_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2058</name>
+
+        <i-name>All Pay Notes Created one Clearing Day, Privileged</i-name>
+
+        <structure_ref>QUERY_CREATED_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2058</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2065</name>
+
+        <i-name>Selected Pay Notes Created one Business Day, Privileged</i-name>
+
+        <structure_ref>ANSWER_SELECTED_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2065</name>
+
+        <i-name>Selected Pay Notes Created one Business Day, Privileged</i-name>
+
+        <structure_ref>QUERY_SELECTED_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2065</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2050</name>
+
+        <i-name>All Manual Payments, Privileged</i-name>
+
+        <structure_ref>ANSWER_MANUAL_PAYMENTS</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2050</name>
+
+        <i-name>All Manual payments, Privileged</i-name>
+
+        <structure_ref>QUERY_MANUAL_PAYMENTS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2050</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2064</name>
+
+        <i-name>Selected Manual Payments, Privileged</i-name>
+
+        <structure_ref>ANSWER_SELECTED_MANUAL_PAYMENTS</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2064</name>
+
+        <i-name>Selected Manual payments, Privileged</i-name>
+
+        <structure_ref>QUERY_SELECTED_MANUAL_PAYMENTS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2064</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC518</name>
+
+        <i-name>SC518</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_CANCEL_REQ</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2059</name>
+
+        <i-name>Cancel VPC Deliveries, Privileged</i-name>
+
+        <structure_ref>QUERY_CANCEL_VPC_DELIVERY</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2052</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ12</name>
+
+        <i-name>DvP Instruction Version, Today</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION_VERSION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA12</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ13</name>
+
+        <i-name>DvP Instruction Version, Historic</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION_VERSION</structure_ref>
+
+        <properties>
+
+            <facility>EP5</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA13</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ268</name>
+
+        <i-name>DVP Instruction version for all DVP instructions, Internal</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION_VERSION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA268</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ269</name>
+
+        <i-name>DVP Instruction version for all DVP instructions, Internal</i-name>
+
+        <structure_ref>CO_QUERY_DVP_INSTRUCTION_VERSION</structure_ref>
+
+        <properties>
+
+            <facility>EP5</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA269</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2062</name>
+
+        <i-name>DVP Instruction per delivery unit, Privileged</i-name>
+
+        <structure_ref>QUERY_DVP_EXT</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2062</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2063</name>
+
+        <i-name>DVP Instruction per delivery unit, Historic, Privileged</i-name>
+
+        <structure_ref>QUERY_DVP_EXT</structure_ref>
+
+        <properties>
+
+            <facility>EP5</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2063</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA12</name>
+
+        <i-name>DvP Instruction Version, Today</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA13</name>
+
+        <i-name>DvP Instruction Version, Historic</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA268</name>
+
+        <i-name>SA268</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA269</name>
+
+        <i-name>SA269</i-name>
+
+        <structure_ref>CO_ANSWER_DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2062</name>
+
+        <i-name>SA2062</i-name>
+
+        <structure_ref>ANSWER_DVP_EXT</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2063</name>
+
+        <i-name>SA2063</i-name>
+
+        <structure_ref>ANSWER_DVP_EXT</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SD514</name>
+
+        <i-name>Delivery, Internal</i-name>
+
+        <structure_ref>DELIVERY_TRANS</structure_ref>
+
+        <properties>
+
+            <facility>EP0</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SD516</name>
+
+        <i-name>Phase, Internal</i-name>
+
+        <structure_ref>PHASE_TRANS</structure_ref>
+
+        <properties>
+
+            <facility>EP0</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA16</name>
+
+        <i-name>All Pay Notes Created one Settlement Instruction Day</i-name>
+
+        <structure_ref>ANSWER_CREATED_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ16</name>
+
+        <i-name>All Pay Notes Created one Settlement Instruction Day</i-name>
+
+        <structure_ref>QUERY_CREATED_PAYNOTE_INFO</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA16</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ270</name>
+
+        <i-name>Paynote details, Privileged</i-name>
+
+        <structure_ref>QUERY_PAYNOTE_INFO_DETAIL</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA270</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA270</name>
+
+        <i-name>Answer paynote details, Privileged</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>PAYNOTE_INFO_DETAIL</structure_ref>
+
+                        <structure_ref>PAYNOTE_INFO_DETAIL_ITEM</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ14</name>
+
+        <i-name>Paynote details</i-name>
+
+        <structure_ref>QUERY_PAYNOTE_INFO_DETAIL</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA14</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA14</name>
+
+        <i-name>Answer paynote details</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>PAYNOTE_INFO_DETAIL</structure_ref>
+
+                        <structure_ref>PAYNOTE_INFO_DETAIL_ITEM</structure_ref>
+
+                   </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC262</name>
+
+        <i-name>Phase, Internal</i-name>
+
+        <structure_ref>REG_MANUAL_PAYMENT</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC265</name>
+
+        <i-name>Phase, Internal</i-name>
+
+        <structure_ref>MOD_MANUAL_PAYMENT</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC267</name>
+
+        <i-name>Phase, Internal</i-name>
+
+        <structure_ref>DEL_MANUAL_PAYMENT</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC264</name>
+
+        <i-name>Phase, Internal</i-name>
+
+        <structure_ref>CREATE_PAYNOTES</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ271</name>
+
+        <i-name>Query Settlement history</i-name>
+
+        <structure_ref>QUERY_SE_HISTORY</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA271</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA271</name>
+
+        <i-name>Answer settlement history</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>SETTLEMENT_HISTORY</structure_ref>
+
+                        <structure_ref>SETTLEMENT_FULL_HISTORY</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC266</name>
+
+        <i-name>Create Accounting</i-name>
+
+        <structure_ref>CREATE_ACCOUNTING</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>true</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ273</name>
+
+        <i-name>Account codes overview, Privileged</i-name>
+
+        <structure_ref>QUERY_ACCOUNT_CODES</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA273</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA273</name>
+
+        <i-name>Answer account codes overview, Privileged</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>ACCOUNT_CODE</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ274</name>
+
+        <i-name>Account codes detail, Privileged</i-name>
+
+        <structure_ref>QUERY_ACCOUNT_CODES_DETAIL</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA274</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA274</name>
+
+        <i-name>Answer account codes detail, Privileged</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>ACCOUNT_CODE</structure_ref>
+
+                        <structure_ref>ACCOUNT_CODE_DETAIL</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ275</name>
+
+        <i-name>Query failed accountings, Privileged</i-name>
+
+        <structure_ref>QUERY_FAILED_ACCOUNTINGS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA275</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA275</name>
+
+        <i-name>Answer failed accountings, Privileged</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>FAILED_ACCOUNTINGS</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ276</name>
+
+        <i-name>Query failed accountings details, Privileged</i-name>
+
+        <structure_ref>QUERY_FAILED_ACCOUNTINGS_DETAILS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA276</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA276</name>
+
+        <i-name>Answer failed accountings details, Privileged</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>FAILED_ACCOUNTINGS</structure_ref>
+
+                        <structure_ref>FAILED_ACCOUNTINGS_DETAIL</structure_ref>
+
+                        <structure_ref>PAYNOTE_INFO_DETAIL</structure_ref>
+
+                        <structure_ref>PAYNOTE_INFO_DETAIL_ITEM</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ277</name>
+
+        <i-name>Query non booked accountings, Privileged</i-name>
+
+        <structure_ref>QUERY_NON_BOOKED_ACCOUNTINGS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA277</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA277</name>
+
+        <i-name>Answer non booked accountings, Privileged</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>NON_BOOKED_ACCOUNTINGS</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC268</name>
+
+        <i-name>Create Account codes</i-name>
+
+        <structure_ref>REG_ACCOUNT_CODES</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>true</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC269</name>
+
+        <i-name>Modify Account codes</i-name>
+
+        <structure_ref>MOD_ACCOUNT_CODES</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>true</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC270</name>
+
+        <i-name>Delete Account Codes</i-name>
+
+        <structure_ref>DEL_ACCOUNT_CODES</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC271</name>
+
+        <i-name>Transfer non booked accounting</i-name>
+
+        <structure_ref>TRANSFER_NON_BOOKED_ACCOUNTINGS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC272</name>
+
+        <i-name>Mark paynote as paid</i-name>
+
+        <structure_ref>PAY_MARK_PAYNOTE</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC528</name>
+
+        <i-name>Mark paynote as paid</i-name>
+
+        <structure_ref>PAY_MARK_PAYNOTE</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC273</name>
+
+        <i-name>Modify paynote and delivery</i-name>
+
+        <structure_ref>MOD_PAYNOTE_DELIVERY</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ278</name>
+
+        <i-name>Query for report information</i-name>
+
+        <structure_ref>QUERY_REPORT_DATA</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>true</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA278</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA278</name>
+
+        <i-name>Answer RIX bank information</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>RIX_BANK_DATA_ITEM</structure_ref>
+
+                        <structure_ref>RIX_MEM_DATA_ITEM</structure_ref>
+
+                        <structure_ref>RIX_PAYMENT_MEM_DATA_ITEM</structure_ref>
+
+                        <structure_ref>ACCOUNTING_DATA_ITEM</structure_ref>
+
+                        <structure_ref>PAYNOTE_DATA</structure_ref>
+
+                        <structure_ref>DELIVERY_DATA</structure_ref>
+
+                        <structure_ref>VAT_DATA</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ366</name>
+
+        <i-name>Query SE_RTS for available services</i-name>
+
+        <structure_ref>CL_QUERY_RPTSRV_SERVICES</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>false</segmented>
+
+            <answers>
+
+                <answer>SA366</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA366</name>
+
+        <i-name>Answer SQ366 query</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_VIM_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>RPT_SERVICE</structure_ref>
+
+                        <structure_ref>NS_REPORT_TEMPLATE_PARAM</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIT">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC366</name>
+
+        <i-name>Execute SE_RTS service</i-name>
+
+        <variable>
+
+            <structure_ref>TRANS_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>RPT_SERVICE</structure_ref>
+
+                        <structure_ref>NS_REPORT_PARAM_CREATE</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC274</name>
+
+        <i-name>DVP Instruction</i-name>
+
+        <structure_ref>DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+   </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC530</name>
+
+        <i-name>DVP Instruction, Privileged</i-name>
+
+        <structure_ref>DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>   
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2066</name>
+
+        <i-name>DVP Instruction, Privileged</i-name>
+
+        <structure_ref>DVP_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC531</name>
+
+        <i-name>Add Instruction Number</i-name>
+
+        <structure_ref>ADD_INSTRUCTION_NBR</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC532</name>
+
+        <i-name>DVP Instruction, privileged</i-name>
+
+        <structure_ref>DVP_INSTRUCTION_PRIV</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ514</name>
+
+        <i-name>Query payment instr info, Internal</i-name>
+
+        <structure_ref>QUERY_PAYMENT_INSTR_INFO_INT</structure_ref>
+
+        <properties>
+
+            <facility>IP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>false</segmented>
+
+            <answers>
+
+                <answer>SA514</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA514</name>
+
+        <i-name>Query payment instr info, Internal</i-name>
+
+        <structure_ref>ANSWER_PAYMENT_INSTR_INFO_INT</structure_ref>
+
+        <properties>
+
+           <segmented>false</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ284</name>
+
+        <i-name>Payment Instruction, Internal</i-name>
+
+        <structure_ref>QUERY_PAYMENT_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>IP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA284</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA284</name>
+
+        <i-name>Payment Instruction, Internal</i-name>
+
+        <structure_ref>ANSWER_PAYMENT_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ285</name>
+
+        <i-name>CO Query Open Settlement Position for Position Transfer</i-name>
+
+        <structure_ref>CO_QUERY_OPEN_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA285</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA285</name>
+
+        <i-name>CO Open Settlement Position (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_SETTLEMENT_POSITION_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>SETTLEMENT_POSITION_BASE</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_PENDING</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_REMAINING</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2076</name>
+
+        <i-name>Payment Instruction, Privileged</i-name>
+
+        <structure_ref>QUERY_PAYMENT_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>IP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA2076</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+       </version>
+
+        <name>SA2076</name>
+
+        <i-name>Payment Instruction, Privileged</i-name>
+
+        <structure_ref>ANSWER_PAYMENT_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ286</name>
+
+        <i-name>Payment Batch Run History, Internal</i-name>
+
+        <structure_ref>QUERY_PAYMENT_STATE_HIS</structure_ref>
+
+        <properties>
+
+            <facility>IP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA286</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA286</name>
+
+        <i-name>Payment Batch Run History, Internal</i-name>
+
+        <structure_ref>ANSWER_PAYMENT_STATE_HIS</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="QUERY">
+
+                              <version>
+
+                                             <major>1</major>
+
+                                             <minor>0</minor>
+
+                              </version>
+
+                              <name>SQ516</name>
+
+                              <i-name>Payment Batch Run History</i-name>
+
+                              <structure_ref>QUERY_PAYMENT_STATE_HIS</structure_ref>
+
+                              <properties>
+
+                                             <facility>IP4</facility>
+
+                                             <partitioned>false</partitioned>
+
+                        <segmented>true</segmented>
+
+                                             <answers>
+
+                                                            <answer>SA516</answer>
+
+                                             </answers>
+
+                              </properties>
+
+               </message>
+
+               <message xsi:type="ANSWER">
+
+                              <version>
+
+                                             <major>1</major>
+
+                                             <minor>0</minor>
+
+                              </version>
+
+                              <name>SA516</name>
+
+                              <i-name>Payment Batch Run History, Internal</i-name>
+
+                              <structure_ref>ANSWER_PAYMENT_STATE_HIS_INT</structure_ref>
+
+                              <properties>
+
+                                             <segmented>true</segmented>
+
+                              </properties>
+
+               </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC275</name>
+
+        <i-name>Payment instruction change state</i-name>
+
+        <structure_ref>PAYMENT_INSTRUCTION_CHANGE_STATE</structure_ref>
+
+        <properties>
+
+            <facility>IP2</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2062</name>
+
+        <i-name>Payment Instruction Bulk Change State</i-name>
+
+        <structure_ref>PAYMENT_INSTRUCTION_BULK_CHANGE_STATE</structure_ref>
+
+        <properties>
+
+            <facility>IP2</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2067</name>
+
+        <i-name>Payment Instruction Change State</i-name>
+
+       <structure_ref>PAYMENT_INSTRUCTION_CHANGE_STATE_INT</structure_ref>
+
+        <properties>
+
+            <facility>IP2</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB5</name>
+
+        <i-name>Payment Batch Run Information</i-name>
+
+        <structure_ref>PAYMENT_STATE_INFO</structure_ref>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIB">
+
+                       <version>
+
+                                      <major>1</major>
+
+                                             <minor>0</minor>
+
+                              </version>
+
+                              <name>SB2060</name>
+
+                              <i-name>Payment Instruction Batch Run Information, Privileged (VIM)</i-name>
+
+                              <variable>
+
+                     <structure_ref>BROADCAST_HDR</structure_ref>
+
+                     <sequence>
+
+                                        <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                                               <choice>
+
+                  <structure_ref>PAYMENT_STATE</structure_ref>
+
+                                               </choice>
+
+                     </sequence>
+
+                </variable>
+
+                       <properties>
+
+                                      <info_type>general</info_type>
+
+                                             <info_class/>
+
+                </properties>
+
+               </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC2068</name>
+
+        <i-name>Payment Instruction, Privileged (VIM)</i-name>
+
+        <structure_ref>QUERY_PAYMENT_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>IP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA2068</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2068</name>
+
+        <i-name>Payment Instruction, Privileged (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>PAYMENT_INSTRUCTION</structure_ref>
+
+                        <structure_ref>PAYMENT_INSTRUCTION_RECON</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC287</name>
+
+        <i-name>Start or Update Payment Batch</i-name>
+
+        <structure_ref>CHANGE_PAYMENT_STATE</structure_ref>
+
+        <properties>
+
+            <facility>IP2</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB6</name>
+
+        <i-name>Settlement Position, Dedicated</i-name>
+
+        <structure_ref>SETTLEMENT_POSITION_DEDICATED_BDX</structure_ref>
+
+        <properties>
+
+            <info_type>dedicated</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB2061</name>
+
+        <i-name>Settlement Position</i-name>
+
+        <variable>
+
+            <structure_ref>BROADCAST_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                <choice>
+
+                    <structure_ref>SETTLEMENT_POSITION</structure_ref>
+
+                    <structure_ref>MATCH_ID</structure_ref>
+
+                    <structure_ref>SIDE_MATCH_ID</structure_ref>
+
+                    <structure_ref>HOLDBACK_INST_TYPE_VIM</structure_ref>
+
+                    <structure_ref>SETTLE_WITHDRAW</structure_ref>
+
+                    <structure_ref>VARAV_END_DATE</structure_ref>
+
+                    <structure_ref>STRIP_BOND_INFO_VIM</structure_ref>
+
+                    <structure_ref>TRADE_INFO</structure_ref>
+
+                </choice>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC276</name>
+
+        <i-name>Settlement Position Transfer</i-name>
+
+        <structure_ref>TRANSFER_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC277</name>
+
+        <i-name>Settlement Position Close</i-name>
+
+        <structure_ref>CLOSE_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC278</name>
+
+        <i-name>Cancel Manual Settlement Position Instruction</i-name>
+
+        <structure_ref>CANCEL_MANUAL_SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC23</name>
+
+        <i-name>Enter Delivery Request</i-name>
+
+        <structure_ref>ENTER_DELIVERY_REQUEST</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC279</name>
+
+        <i-name>Enter Delivery Request</i-name>
+
+        <structure_ref>ENTER_DELIVERY_REQUEST</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+           <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC24</name>
+
+        <i-name>Cancel Delivery Request</i-name>
+
+        <structure_ref>CANCEL_DELIVERY_REQUEST</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC280</name>
+
+       <i-name>Cancel Delivery Request</i-name>
+
+        <structure_ref>CANCEL_DELIVERY_REQUEST</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC281</name>
+
+        <i-name>Create Delivery Requests Dvp Instructions</i-name>
+
+        <structure_ref>CREATE_DELIVERY_REQUEST_DVP_INSTRUCTIONS</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ32</name>
+
+        <i-name>Query Delivery Requests</i-name>
+
+        <structure_ref>QUERY_DELIVERY_REQUESTS</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA32</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ288</name>
+
+        <i-name>CO Query Delivery Requests</i-name>
+
+        <structure_ref>QUERY_DELIVERY_REQUESTS</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA288</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ25</name>
+
+        <i-name>Query Settlement Position</i-name>
+
+        <structure_ref>QUERY_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA25</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ281</name>
+
+        <i-name>CO Query Settlement Position</i-name>
+
+        <structure_ref>CO_QUERY_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA281</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ282</name>
+
+        <i-name>CO Query Settlement Position History</i-name>
+
+        <structure_ref>CO_QUERY_SETTLEMENT_POSITION_HISTORY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA282</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2071</name>
+
+        <i-name>Query Settlement Position Proxy</i-name>
+
+        <structure_ref>QUERY_SETTLEMENT_POSITION_PROXY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2071</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA282</name>
+
+        <i-name>CO Settlement Position History (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>CO_ANSWER_SETTLEMENT_POSITION_HISTORY_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>CO_SETTLEMENT_POSITION</structure_ref>
+
+                        <structure_ref>CO_DVP</structure_ref>
+
+                        <structure_ref>CO_DVP_HISTORY</structure_ref>
+
+                        <structure_ref>CO_DVP_OPERATION</structure_ref>
+
+                        <structure_ref>CO_DELIVERY_BDX_LOG</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA25</name>
+
+        <i-name>Settlement Position (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_SETTLEMENT_POSITION_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>SETTLEMENT_POSITION_BASE</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_PENDING</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_REMAINING</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA281</name>
+
+        <i-name>CO Settlement Position (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_SETTLEMENT_POSITION_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>SETTLEMENT_POSITION_BASE</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_PENDING</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_REMAINING</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2071</name>
+
+        <i-name>Settlement Position Proxy (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_SETTLEMENT_POSITION_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>SETTLEMENT_POSITION_BASE</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_PENDING</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+                        <structure_ref>SETTLEMENT_POSITION_REMAINING</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC999</name>
+
+        <i-name>Ping Message for internal primary/standby handling</i-name>
+
+        <structure_ref>PING_MESSAGE</structure_ref>
+
+        <properties>
+
+            <facility>EP0</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ999</name>
+
+        <i-name>Ping Message for internal primary/standby handling</i-name>
+
+        <structure_ref>PING_MESSAGE</structure_ref>
+
+        <properties>
+
+            <facility>EP0</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="QUERY">
+
+                              <version>
+
+                                             <major>1</major>
+
+                                             <minor>0</minor>
+
+                              </version>
+
+                              <name>SQ515</name>
+
+                              <i-name>Payment Instruction, Internal (VIM)</i-name>
+
+                              <structure_ref>QUERY_PAYMENT_INSTRUCTION_INT</structure_ref>
+
+                              <properties>
+
+                                             <facility>IP4</facility>
+
+                                             <partitioned>false</partitioned>
+
+                                             <segmented>true</segmented>
+
+                                             <answers>
+
+                                                     <answer>SA515</answer>
+
+                                             </answers>
+
+                       </properties>
+
+               </message>
+
+               <message xsi:type="VIA">
+
+                       <version>
+
+                                      <major>1</major>
+
+                                             <minor>0</minor>
+
+                              </version>
+
+                              <name>SA515</name>
+
+                              <i-name>Query Payment Instruction, Internal (VIM)</i-name>
+
+                              <variable>
+
+                                   <structure_ref>ANSWER_PARTITION_HDR</structure_ref>
+
+                                   <sequence>
+
+                                          <structure_ref>ITEM_HDR</structure_ref>
+
+                                          <sequence>
+
+                                                 <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                                                               <choice>
+
+                                                                    <structure_ref>PAYMENT_INSTRUCTION_INT</structure_ref>
+
+                                                       </choice>
+
+                                          </sequence>
+
+                                   </sequence>
+
+                              </variable>
+
+                              <properties>
+
+                                      <segmented>true</segmented>
+
+                              </properties>
+
+               </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC32</name>
+
+        <i-name>CSD End Of Day Complete</i-name>
+
+        <structure_ref>CSD_EOD_COMPLETE</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC33</name>
+
+        <i-name>CSD Settlement Run Complete</i-name>
+
+        <structure_ref>CSD_SETTLEMENT_RUN_COMPLETE</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB7</name>
+
+        <i-name>Request Pool Account Update</i-name>
+
+        <structure_ref>REQUEST_POOL_ACCOUNT_UPDATE</structure_ref>
+
+        <properties>
+
+            <info_type>dedicated</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC34</name>
+
+        <i-name>CSD Pool Account Update</i-name>
+
+        <structure_ref>CSD_POOL_ACCOUNT_UPDATE</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC289</name>
+
+        <i-name>Penalty Fee and Compensation Update</i-name>
+
+        <structure_ref>PENALTY_CONF_UPDATE</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC290</name>
+
+        <i-name>Penalty Fee and Compensation Confirm</i-name>
+
+        <structure_ref>PENALTY_CONF_CONFIRM</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ283</name>
+
+        <i-name>Query Penalty Fee and Compensation</i-name>
+
+        <structure_ref>QUERY_PENALTY_CONFIRMATION</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA283</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA283</name>
+
+        <i-name>Answer Penalty Fee and Compensation</i-name>
+
+        <structure_ref>ANSWER_PENALTY_CONFIRMATION</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB2062</name>
+
+        <i-name>Start of Day Position Info</i-name>
+
+        <variable>
+
+            <structure_ref>BROADCAST_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                <choice>
+
+                                                            <structure_ref>ACCOUNT_VIM</structure_ref>
+
+                <structure_ref>START_OF_DAY_POSITION_ITEM</structure_ref>
+
+                                                            <structure_ref>START_OF_DAY_POSITION_SETTLE_DATE_ITEM</structure_ref>
+
+                <structure_ref>BDX_COMPLETE_VIM</structure_ref>
+
+                </choice>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class>1</info_class>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC291</name>
+
+        <i-name>Penalty Fee Input Data Entry</i-name>
+
+        <structure_ref>PENALTY_FEE_INPUT_ENTRY</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ291</name>
+
+        <i-name>Query Penalty Fee and Confirmation Input</i-name>
+
+        <structure_ref>QUERY_PENALTY_FEE_INPUT</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA291</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA291</name>
+
+        <i-name>Answer Penalty Fee and Compensation Input</i-name>
+
+        <structure_ref>ANSWER_PENALTY_FEE_INPUT</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB515</name>
+
+        <i-name>Payment Instruction Broadcast, Internal (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>BROADCAST_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                <choice>
+
+                   <structure_ref>PAYMENT_STATE_INT</structure_ref>
+
+                </choice>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+   <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB520</name>
+
+        <i-name>Penalty fee and compensation data</i-name>
+
+               <variable>
+
+          <structure_ref>BROADCAST_HDR</structure_ref>
+
+                 <sequence>
+
+            <structure_ref>ITEM_HDR</structure_ref>
+
+            <sequence>
+
+              <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+              <choice>
+
+                <structure_ref>PENALTY_FEE_AND_COMP</structure_ref>
+
+              </choice>
+
+            </sequence>
+
+          </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+   <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB521</name>
+
+        <i-name>SE startup bdx</i-name>
+
+               <variable>
+
+          <structure_ref>BROADCAST_HDR</structure_ref>
+
+                 <sequence>
+
+            <structure_ref>ITEM_HDR</structure_ref>
+
+            <sequence>
+
+              <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+              <choice>
+
+                <structure_ref>SE_STARTUP</structure_ref>
+
+              </choice>
+
+            </sequence>
+
+          </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA32</name>
+
+        <i-name>Delivery Request (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_DELIVERY_REQUEST_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>DELIVERY_REQUEST_BASE</structure_ref>
+
+                                                                                          <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                                                                                          <structure_ref>DELIVERY_REQUEST_REMAIN_AVAILABLE</structure_ref>
+
+                                                                                          <structure_ref>DELIVERY_REQUEST_SETTLED</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA288</name>
+
+        <i-name>Delivery Request (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_DELIVERY_REQUEST_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>DELIVERY_REQUEST_BASE</structure_ref>
+
+                                                                                          <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                                                                                          <structure_ref>DELIVERY_REQUEST_REMAIN_AVAILABLE</structure_ref>
+
+                                                                                          <structure_ref>DELIVERY_REQUEST_SETTLED</structure_ref>
+
+                                                                                          <structure_ref>SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB2069</name>
+
+        <i-name>Delivery Request</i-name>
+
+        <variable>
+
+            <structure_ref>BROADCAST_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                <choice>
+
+                                                                           <structure_ref>DELIVERY_REQUEST_BASE</structure_ref>
+
+                                                                           <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                                                                           <structure_ref>DELIVERY_REQUEST_REMAIN_AVAILABLE</structure_ref>
+
+                                                                           <structure_ref>DELIVERY_REQUEST_SETTLED</structure_ref>
+
+                                                                           <structure_ref>SETTLEMENT_POSITION_INSTRUCTION</structure_ref>
+
+                </choice>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class>1</info_class>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2081</name>
+
+        <i-name>Query Delivery Requests, Privileged</i-name>
+
+        <structure_ref>QUERY_DELIVERY_REQUESTS</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA288</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2082</name>
+
+        <i-name>Query gross info</i-name>
+
+        <structure_ref>QUERY_GROSS_INFO</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+            <answers>
+
+                <answer>SA2082</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="VIA">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2082</name>
+
+        <i-name>Answer gross info (VIM)</i-name>
+
+        <variable>
+
+            <structure_ref>ANSWER_GROSS_INFO_VIM</structure_ref>
+
+            <sequence>
+
+                <structure_ref>ITEM_HDR</structure_ref>
+
+                <sequence>
+
+                    <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                    <choice>
+
+                        <structure_ref>GROSS_INFO_API</structure_ref>
+
+                    </choice>
+
+                </sequence>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+ 
+
+    <message xsi:type="VIB">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB8</name>
+
+        <i-name>Directed Delivery Request</i-name>
+
+        <variable>
+
+            <structure_ref>BROADCAST_HDR</structure_ref>
+
+            <sequence>
+
+                <structure_ref>SUB_ITEM_HDR</structure_ref>
+
+                <choice>
+
+                    <structure_ref>DELIVERY_REQUEST_BASE</structure_ref>
+
+                    <structure_ref>SETTLEMENT_POSITION_TOTAL</structure_ref>
+
+                    <structure_ref>DELIVERY_REQUEST_REMAIN_AVAILABLE</structure_ref>
+
+                    <structure_ref>DELIVERY_REQUEST_SETTLED</structure_ref>
+
+                </choice>
+
+            </sequence>
+
+        </variable>
+
+        <properties>
+
+            <info_type>dedicated</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+ 
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC36</name>
+
+        <i-name>Approve or reject early delivery request</i-name>
+
+        <structure_ref>ACCEPT_REJECT_DELIVERY_REQUEST</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+ 
+
+    <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC292</name>
+
+        <i-name>Approve or reject early delivery request</i-name>
+
+        <structure_ref>ACCEPT_REJECT_DELIVERY_REQUEST</structure_ref>
+
+        <properties>
+
+            <facility>EP3</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+ 
+
+ 
+
+    <message xsi:type="QUERY">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SQ2066</name>
+
+        <i-name>Query for position updates from one specific delivery number</i-name>
+
+        <structure_ref>QUERY_SETTLEMENT_POSITION_UPDATE</structure_ref>
+
+        <properties>
+
+            <facility>IP4</facility>
+
+            <partitioned>false</partitioned>
+
+            <segmented>true</segmented>
+
+            <answers>
+
+                <answer>SA2066</answer>
+
+            </answers>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="ANSWER">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SA2066</name>
+
+        <i-name>Answer for position updates from one specific delivery number</i-name>
+
+        <structure_ref>ANSWER_SETTLEMENT_POSITION_UPDATE</structure_ref>
+
+        <properties>
+
+            <segmented>true</segmented>
+
+        </properties>
+
+    </message>
+
+    <message xsi:type="BROADCAST">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SB9</name>
+
+        <i-name>Penalty Fee and Compensation Broadcast</i-name>
+
+        <structure_ref>PENALTY_FEE_AND_COMP_BDX</structure_ref>
+
+        <properties>
+
+            <info_type>general</info_type>
+
+            <info_class/>
+
+        </properties>
+
+    </message>
+
+               <message xsi:type="TRANSACTION">
+
+        <version>
+
+            <major>1</major>
+
+            <minor>0</minor>
+
+        </version>
+
+        <name>SC285</name>
+
+        <i-name>Settlement Position Multi Transfer</i-name>
+
+        <structure_ref>TRANSFER_MULTI_SETTLEMENT_POSITION</structure_ref>
+
+        <properties>
+
+            <facility>EP4</facility>
+
+            <partitioned>false</partitioned>
+
+        </properties>
+
+    </message>
+
+ 
+
+</root>
